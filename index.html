@@ -1,28 +1,199 @@
 <!doctype html>
-<html lang="en">
+<html lang="fa" dir="rtl" x-data="darkMode" :class="{'dark' : darkMode}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tailwind + Bun Project</title>
     <link rel="stylesheet" href="./dist/output.css" />
+    <script defer src="./src/alpine.js"></script>
   </head>
-  <body
-    class="bg-slate-600 text-white flex min-h-screen items-center justify-center"
-  >
-    <div class="text-center space-y-4">
-      <h1 class="text-4xl font-extrabold text-teal-400 animate-pulse">
-        سلام با Bun و Tailwind v4!
-      </h1>
-      <p class="text-slate-400">
-        این پروژه بدون نیاز به Vite و NPM اجرا شده است.
-      </p>
-      <button
-        class="bg-teal-500 hover:bg-teal-600 text-slate-950 font-bold px-6 py-2 rounded-full transition-all"
-      >
-        تست دکمه
-      </button>
-    </div>
+  <body class="dark:bg-gray-900">
+    <!-- header -->
+    <header class="shadow-lg">
+      <div class="container mx-auto py-4 px-4">
+        <nav class="flex justify-between items-center relative">
+          <!-- desktop nav-->
+          <div class="hidden sm:flex items-center">
+            <div>
+              <button class="btn btn-primary">عضویت</button>
+              <button class="btn btn-secondary mr-2">ورود</button>
+            </div>
 
-    <script type="module" src="./src/main.js"></script>
+            <div class="mr-7 dark:text-white/90">
+              <ul class="flex gap-4">
+                <li class="nav-active">صفحه اصلی</li>
+
+                <div x-data="dropdown">
+                  <li
+                    class="nav-item"
+                    @click="toggle"
+                    :class="{'nav-active' : open}"
+                  >
+                    محصولات
+                    <i class="fas fa-chevron-down text-[0.7rem]"></i>
+                  </li>
+
+                  <div
+                    x-show="open"
+                    x-cloak
+                    class="absolute top-12 bg-white border rounded-lg py-4 px-6 dark:bg-gray-800 dark:text-white/90"
+                  >
+                    <ul class="space-y-3">
+                      <li class="hover:text-indigo-600 cursor-pointer">
+                        محصولات تکی
+                      </li>
+                      <li class="hover:text-indigo-600 cursor-pointer">
+                        محصولات عمده
+                      </li>
+                      <li class="hover:text-indigo-600 cursor-pointer">
+                        محصولات ویژه زیاد
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <li class="nav-item">درباره ما</li>
+                <li class="nav-item">تماس با ما</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- mobile nav -->
+          <div class="md:hidden" x-data="dropdown">
+            <div @click="toggle">
+              <i class="fas fa-bars text-xl dark:text-white/90"></i>
+            </div>
+
+            <div
+              x-transition:enter="transition ease-out duration-300"
+              x-transition:enter-start="opacity-0 scale-90"
+              x-transition:enter-end="opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-300"
+              x-transition:leave-start="opacity-100 scale-100"
+              x-transition:leave-end="opacity-0 scale-90"
+              x-show="open"
+              x-cloak
+              class="absolute bg-white border rounded-lg py-4 px-6 w-full dark:bg-gray-800 dark:text-white/90 "
+            >
+              <div class="absolute" @click="open = false">
+                <i class="fas fa-times text-xl"></i>
+              </div>
+              <ul class="flex flex-col gap-4 text-center">
+                <li>صفحه اصلی</li>
+
+                <div x-data="dropdown">
+                  <li @click="toggle">
+                    محصولات
+                    <i class="fas fa-chevron-down text-[0.7rem]"></i>
+                  </li>
+
+                  <div
+                    x-show="open"
+                    x-cloak
+                    class="max-w-max mx-auto bg-white border rounded-lg py-4 px-6  dark:bg-gray-800 dark:text-white/90 "
+                  >
+                    <ul class="space-y-3">
+                      <li class="hover:text-indigo-600 cursor-pointer">
+                        محصولات تکی
+                      </li>
+                      <li class="hover:text-indigo-600 cursor-pointer">
+                        محصولات عمده
+                      </li>
+                      <li class="hover:text-indigo-600 cursor-pointer">
+                        محصولات ویژه زیاد
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <li>درباره ما</li>
+                <li>تماس با ما</li>
+              </ul>
+
+              <div class="flex flex-col gap-4 mt-3">
+                <button class="btn btn-primary">عضویت</button>
+                <button class="btn btn-secondary mr-2">ورود</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- logo -->
+          <div class="flex">
+            <!-- <div> -->
+            <button
+              @click="toDarkMode"
+              x-show="nextMode == 'dark'"
+              x-cloak
+              class="btn btn-secondary leading-0 ml-4"
+            >
+              <i class="fas fa-moon"></i>
+            </button>
+            <button
+              @click="toLightMode"
+              x-show="nextMode == 'light'"
+              x-cloak
+              class="btn btn-secondary leading-0 ml-4"
+            >
+              <i class="fas fa-sun"></i>
+            </button>
+            <button
+              @click="toSystemMode"
+              x-show="nextMode == 'system'"
+              x-cloak
+              class="btn btn-secondary leading-0 ml-4"
+            >
+              <i class="fas fa-desktop"></i>
+            </button>
+            <!-- </div> -->
+            <div class="text-xl font-bold dark:text-white/90">Poriya.ir</div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!--end header -->
+
+    <script>
+      document.addEventListener("alpine:init", () => {
+        (Alpine.data("dropdown", () => ({
+          open: false,
+
+          toggle() {
+            this.open = !this.open;
+          },
+        })),
+          Alpine.data("darkMode", () => ({
+            darkMode: false,
+            nextMode: "",
+
+            init() {
+              this.nextMode = localStorage.nextThem
+              if (localStorage.them === "dark") {
+                this.darkMode = true;
+              } else {
+                this.darkMode = false;
+              }              
+            },
+
+            toDarkMode() {
+              localStorage.them = "dark";
+              this.darkMode = true;
+              localStorage.nextThem = "system"
+              this.nextMode = "system";
+            },
+            toLightMode() {
+              localStorage.them = "light";
+              this.darkMode = false;
+              this.nextMode = "dark";
+              localStorage.nextThem = "dark"
+            },
+            toSystemMode() {
+              localStorage.them = window.matchMedia("(prefers-color-scheme:dark)").matches ? 'dark' : 'light' ;
+              this.darkMode = window.matchMedia("(prefers-color-scheme:dark)").matches;
+              this.nextMode = "light";
+              localStorage.nextThem = "light"
+
+            },
+          })));
+      });
+    </script>
   </body>
 </html>
