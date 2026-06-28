@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tailwind + Bun Project</title>
     <link rel="stylesheet" href="./dist/output.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script defer src="./src/alpine.js"></script>
   </head>
   <body class="dark:bg-gray-900">
@@ -154,7 +155,7 @@
     <section>
       <div class="container mx-auto py-4 px-10 lg:px-20 mt-5">
         <div class="flex flex-col md:flex-row items-center gap-x-24 gap-y-10">
-          <div class="max-w-4/5">
+          <div class="max-w-4/5"  data-aos="fade-up">
             <h1 class="text-2xl dark:text-white/90 font-bold mb-5">
               لوریم ایپسوم <span class="text-indigo-600">متن ساختگی</span>
             </h1>
@@ -173,7 +174,7 @@
             <button class="btn btn-secondary">لوریم</button>
           </div>
 
-          <img
+          <img  data-aos="fade-up" data-aos-delay="300"
             src="./dist/images/social-media-51.png"
             class="w-95 h-auto"
             alt=""
@@ -202,7 +203,7 @@
     </div>
     <section class="bg-gray-100 dark:bg-gray-800">
       <div class="container mx-auto py-4 px-10 lg:px-20">
-        <div class="text-center mb-15">
+        <div class="text-center mb-15" data-aos="fade-down">
           <h1 class="text-2xl dark:text-white/90 font-bold mb-5">
             لوریم ایپسوم <span class="text-indigo-600">متن ساختگی</span>
           </h1>
@@ -212,9 +213,9 @@
           </p>
         </div>
 
-        <div
+        <div data-aos="fade-up"
           class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:w-3/4 mx-auto dark:text-white/90"
-        >
+         >
           <div class="flex">
             <div
               class="flex size-16 shrink-0 items-center justify-center border rounded-full border-indigo-600"
@@ -306,9 +307,11 @@
     </div>
 
     <!-- end service -->
+
+    <!-- price -->
     <section>
       <div class="container mx-auto py-4 px-10 lg:px-20">
-        <div class="text-center mb-15">
+        <div class="text-center mb-15" data-aos="zoom-in-up">
           <h1 class="text-2xl dark:text-white/90 font-bold mb-5">
             لوریم ایپسوم <span class="text-indigo-600">متن ساختگی</span>
           </h1>
@@ -319,9 +322,9 @@
         </div>
 
         <div class="flex justify-between flex-col lg:flex-row gap-8">
-          <div
+          <div data-aos="flip-left" data-aos-delay="550" 
             class="border border-t-8 border-indigo-600 rounded-lg py-5 px-20 text-center dark:bg-gray-800 dark:text-white/90"
-          >
+           >
             <div class="py-7">
               <h1 class="text-2xl font-bold">استارتاپ</h1>
               <p class="my-6">
@@ -342,7 +345,7 @@
             </div>
           </div>
 
-          <div
+          <div data-aos="flip-up" data-aos-delay="400"
             class="bg-indigo-600 text-white border border-t-8 border-indigo-600 rounded-lg py-5 px-20 text-center"
           >
             <div class="py-7">
@@ -367,7 +370,7 @@
             </div>
           </div>
 
-          <div
+          <div data-aos="flip-right" data-aos-delay="700"
             class="border border-t-8 border-indigo-600 rounded-lg py-5 px-20 text-center dark:bg-gray-800 dark:text-white/90"
           >
             <div class="py-7">
@@ -393,32 +396,217 @@
       </div>
     </section>
 
-    <!-- price -->
     <!-- end price -->
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+    <!-- gallery -->
+    <section class="mt-24">
+      <div class="container mx-auto py-4 px-10 lg:px-20">
+        <div class="text-center mb-15">
+          <h1 class="text-2xl dark:text-white/90 font-bold mb-5" data-aos="fade-right">
+            لوریم ایپسوم <span class="text-indigo-600">متن ساختگی</span>
+          </h1>
+          <p class="text-gray-700 dark:text-white/90 leading-8 mb-6" data-aos="fade-left">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+            استفاده از طراحان گرافیک است چاپگرها
+          </p>
+        </div>
+
+        <div x-data="tabs">
+          <ul class="flex justify-center">
+            <template x-for="(tab,index) in tabs" :key="index">
+              <li
+                @click="tabName = tab.category"
+                x-text="tab.display_category"
+                class="px-4 py-2 cursor-pointer dark:text-white/90"
+                :class="tabName == tab.category &&'border-b-4 border-indigo-600'"
+              ></li>
+            </template>
+          </ul>
+
+          <template x-for="(tab,index) in tabs" :key="index">
+            <div
+              x-show="tab.category == tabName"
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5"
+            >
+              <template x-for="(image , index) in tab.images" :key="index">
+                <div>
+                  <img class="rounded-lg" :src="image" alt="" />
+                </div>
+              </template>
+            </div>
+          </template>
+
+          <!-- <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5"
+          >
+            <div>
+              <img
+                class="rounded-xl"
+                src="./dist/images/nature/img_1.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="rounded-xl"
+                src="./dist/images/nature/img_2.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="rounded-lg"
+                src="./dist/images/nature/img_3.jpg"
+                alt=""
+              />
+            </div>
+            <div>
+              <img
+                class="rounded-xl"
+                src="./dist/images/nature/img_4.jpg"
+                alt=""
+              />
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+    <!-- end gallery -->
+
+    <!-- contant us -->
+
+    <section>
+      <div class="container mx-auto py-4 px-10 mt-5 lg:w-4/5">
+        <div
+          class="flex flex-col lg:flex-row items-center gap-x-24 gap-y-10 lg:justify-between"
+        >
+          <div class="max-w-4/5">
+            <h1 class="text-2xl dark:text-white/90 font-bold mb-5">
+              لوریم ایپسوم <span class="text-indigo-600">متن ساختگی</span>
+            </h1>
+            <p
+              class="text-gray-700 text-justify dark:text-white/90 leading-8 mb-6"
+            >
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با و
+              متون بلکه روزنامه و مجله در
+            </p>
+
+            <form action="#">
+              <div>
+                <label class="form-label" for="email">ایمیل :</label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="ایمیل... "
+                  class="form-input"
+                />
+              </div>
+
+              <div class="mt-5">
+                <label class="form-label" for="textera">متن پیام :</label>
+                <textarea
+                  rows="4"
+                  id="textera"
+                  placeholder="پیام..."
+                  class="form-input"
+                ></textarea>
+              </div>
+              <button class="btn btn-primary mt-5">ارسال</button>
+            </form>
+          </div>
+
+          <img src="./dist/images/img_2.png" alt="" />
+        </div>
+      </div>
+    </section>
+    <!-- end contant us -->
+
+    <!-- footer -->
+    <div style="height: 100px; overflow: hidden" class="mt-10">
+      <svg
+        viewBox="0 0 500 150"
+        preserveAspectRatio="none"
+        style="height: 100%; width: 100%"
+      >
+        <path
+          class="fill-gray-100 dark:fill-gray-800"
+          d="M-52.76,154.45 C125.56,108.06 548.81,-55.73 548.81,20.23 L500.00,150.00 L0.00,150.00 Z"
+        ></path>
+      </svg>
+    </div>
+    <footer class="bg-gray-100 dark:bg-gray-800">
+      <div class="container mx-auto py-4 px-10 lg:px-20">
+        <div class="flex flex-col lg:flex-row items-center justify-between">
+          <div class="dark:text-white/90" data-aos="flip-down">
+            <h1 class="text-2xl font-bold">Poriya.pro</h1>
+            <p class="mt-3 mb-6 text-gray-700 leading-8 dark:text-white/90">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با و
+              متون بلکه روزنامه و مجله در
+            </p>
+            <div class="space-x-4">
+              <a href="#"><i class="fab fa-instagram text-4xl"></i></a>
+              <a href="#"><i class="fab fa-telegram-plane text-4xl"></i></a>
+              <a href="#"><i class="fab fa-facebook-f text-4xl"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in text-4xl"></i></a>
+            </div>
+          </div>
+
+          <div
+            class="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-8 lg:mt-0 dark:text-white/90"
+           >
+            <div data-aos="flip-down" data-aos-delay="200">
+              <h2
+                class="font-bold border-b-2 border-indigo-600 mb-3 leading-8 whitespace-nowrap"
+              >
+                بخش های وبسایت
+              </h2>
+              <ul class="space-y-2">
+                <li>صفحه اصلی</li>
+                <li>محصولات</li>
+                <li>درباره ما</li>
+                <li>تماس با ما</li>
+              </ul>
+            </div>
+
+            <div  data-aos="flip-down" data-aos-delay="400">
+              <h2 class="font-bold border-b-2 border-indigo-600 mb-3 leading-8">
+                محصولات
+              </h2>
+              <ul class="space-y-2">
+                <li>صفحه اصلی</li>
+                <li>محصولات</li>
+                <li>درباره ما</li>
+                <li>تماس با ما</li>
+              </ul>
+            </div>
+
+            <div  data-aos="flip-down" data-aos-delay="600">
+              <h2 class="font-bold border-b-2 border-indigo-600 mb-3 leading-8">
+                مورم ایپسوم
+              </h2>
+              <ul class="space-y-2">
+                <li>صفحه اصلی</li>
+                <li>محصولات</li>
+                <li>درباره ما</li>
+                <li>تماس با ما</li>
+              </ul>
+            </div>
+
+            <div  data-aos="flip-down" data-aos-delay="800">
+              <h2 class="font-bold border-b-2 border-indigo-600 mb-3 leading-8">
+                درباره ما
+              </h2>
+              <ul class="space-y-2">
+                <li>درباره ما</li>
+                <li>تماس با ما</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- end footer -->
+
     <script>
       document.addEventListener("alpine:init", () => {
         (Alpine.data("dropdown", () => ({
@@ -428,12 +616,22 @@
             this.open = !this.open;
           },
         })),
-          Alpine.data("darkMode", () => ({
+        Alpine.data("darkMode", () => ({
             darkMode: false,
-            nextMode: "",
+            nextMode: "dark",
 
             init() {
+              
+              if('nextThem' in localStorage)
+            {
+              
               this.nextMode = localStorage.nextThem;
+            }
+            else
+            {              
+              this.nextMode = 'dark'   
+            }
+            
               if (localStorage.them === "dark") {
                 this.darkMode = true;
               } else {
@@ -466,7 +664,65 @@
               localStorage.nextThem = "light";
             },
           })));
+        Alpine.data("tabs", () => ({
+          tabName: "nature",
+          tabs: [
+            {
+              category: "nature",
+              display_category: "طبیعت",
+              images: [
+                "./dist/images/nature/img_1.jpg",
+                "./dist/images/nature/img_2.jpg",
+                "./dist/images/nature/img_3.jpg",
+                "./dist/images/nature/img_4.jpg",
+              ],
+            },
+            {
+              category: "technology",
+              display_category: "تکنولوژی",
+              images: [
+                "./dist/images/technology/img_1.jpg",
+                "./dist/images/technology/img_2.jpg",
+                "./dist/images/technology/img_3.jpg",
+                "./dist/images/technology/img_4.jpg",
+              ],
+            },
+            {
+              category: "travel",
+              display_category: "مسافرت",
+              images: [
+                "./dist/images/travel/img_1.jpg",
+                "./dist/images/travel/img_2.jpg",
+                "./dist/images/travel/img_3.jpg",
+                "./dist/images/travel/img_4.jpg",
+              ],
+            },
+            {
+              category: "all",
+              display_category: "همه",
+              images: [
+                "./dist/images/nature/img_1.jpg",
+                "./dist/images/nature/img_2.jpg",
+                "./dist/images/nature/img_3.jpg",
+                "./dist/images/nature/img_4.jpg",
+                "./dist/images/technology/img_1.jpg",
+                "./dist/images/technology/img_2.jpg",
+                "./dist/images/technology/img_3.jpg",
+                "./dist/images/technology/img_4.jpg",
+                "./dist/images/travel/img_1.jpg",
+                "./dist/images/travel/img_2.jpg",
+                "./dist/images/travel/img_3.jpg",
+                "./dist/images/travel/img_4.jpg",
+              ],
+            },
+          ],
+        }));
       });
+    </script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
     </script>
   </body>
 </html>
